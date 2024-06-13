@@ -2,7 +2,7 @@ pragma solidity ^0.8.18;
 
 contract MyToken {
     string public Token_Name = "Mobeen";
-    string public Token_Abbrv = "hlhiknk";
+    string public Token_Abbrv = "MBN";
     uint public Token_TotalSupply = 0;
 
     mapping(address => uint) public Balance;
