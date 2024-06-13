@@ -1,3 +1,4 @@
+
 pragma solidity ^0.8.18;
 
 contract MyToken {
@@ -16,6 +17,9 @@ contract MyToken {
         if (Balance[Addr] >= Val) {
             Token_TotalSupply -= Val;
             Balance[Addr] -= Val;
+        } else {
+            revert("Insufficient balance to burn");
         }
     }
 }
+
