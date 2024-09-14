@@ -1,36 +1,80 @@
-This repository contains the Solidity code for the MyToken smart contract.
-The contract is a simple implementation of a token system on the Ethereum blockchain, where users can mint and burn tokens.
-We have created a contract "MyToken" in which we have create a Token name, Token Abbravation and total token supply.
 
-Mapping stores the token balance for each address. It associates an address with a uint (the balance).
+---
+# MyToken Smart Contract
 
-The mint function allows new tokens to be created.
-It takes two parameters: Addr (the address to receive the tokens) and Val (the amount of tokens to mint).
-It increases the Token_TotalSupply by the value of Val and also increases the balance of the specified address by Val.
+This repository contains the Solidity code for the **MyToken** smart contract, a simple token system built on the Ethereum blockchain. The contract allows users to mint and burn tokens, making it suitable for basic token management.
 
-The burn function allows tokens to be destroyed.
-It takes two parameters: Addr (the address from which tokens will be burned) and Val (the amount of tokens to burn).
-It checks if the balance of the specified address is greater than or equal to Val.
-If the balance is sufficient, it decreases the Token_TotalSupply by Val and also decreases the balance of the specified address by Val.
+## Contract Overview
 
-**Usage**
-To deploy and interact with this contract, you can use tools like Remix IDE or any Ethereum development framework such as Hardhat or Truffle. After deploying the contract, you can call the mint and burn functions to manage token balances and supply.
+The **MyToken** smart contract defines the following properties:
+- **Token Name**: The name of the token.
+- **Token Abbreviation**: A short representation of the token.
+- **Total Supply**: The total number of tokens in circulation.
 
-Example Interactions
-Minting Tokens:
+A **mapping** is used to store the token balances associated with each address. It links an Ethereum address to a `uint` value, representing the token balance.
 
-Call the mint function with the desired address and amount to create new tokens.
-For example:
-solidity
+### Functions
+
+#### Mint
+
+The `mint` function allows new tokens to be added to the total supply and credited to a specific address.
+
+**Parameters:**
+- `Addr`: The Ethereum address that will receive the newly minted tokens.
+- `Val`: The amount of tokens to mint.
+
+**Behavior:**
+- Increases the `Token_TotalSupply` by the value of `Val`.
+- Increases the balance of `Addr` by `Val`.
+
+#### Burn
+
+The `burn` function destroys tokens, reducing the total supply and the balance of a specified address.
+
+**Parameters:**
+- `Addr`: The Ethereum address from which the tokens will be burned.
+- `Val`: The number of tokens to burn.
+
+**Behavior:**
+- Decreases the `Token_TotalSupply` by `Val` if the balance of `Addr` is sufficient.
+- Decreases the balance of `Addr` by `Val`.
+
+**Error Handling:**
+- If `Addr` has fewer tokens than `Val`, the transaction is reverted with the error: `Insufficient balance to burn`.
+
+## Usage
+
+To deploy and interact with this contract, you can use tools like [Remix IDE](https://remix.ethereum.org/) or Ethereum development frameworks such as [Hardhat](https://hardhat.org/) or [Truffle](https://trufflesuite.com/).
+
+### Deploying the Contract
+
+1. Compile and deploy the contract using your preferred tool.
+2. Once deployed, you can interact with the contract's functions to manage token balances and supply.
+
+### Example Interactions
+
+#### Minting Tokens
+To mint tokens, call the `mint` function with the recipient address and the desired amount.
+
+```solidity
 mint(0xYourAddress, 100);
-This will increase the total supply by 100 and add 100 tokens to the balance of 0xYourAddress.
-Burning Tokens:
+```
+This will:
+- Increase the total supply by 100.
+- Credit 100 tokens to `0xYourAddress`.
 
-Call the burn function with the address and amount of tokens to be burned. 
-For example:
-solidity
+#### Burning Tokens
+To burn tokens, call the `burn` function with the address and the amount of tokens to be burned.
+
+```solidity
 burn(0xYourAddress, 50);
-This will decrease the total supply by 50 and deduct 50 tokens from the balance of 0xYourAddress, provided 0xYourAddress has at least 50 tokens.
+```
+This will:
+- Reduce the total supply by 50.
+- Deduct 50 tokens from `0xYourAddress`, provided it has enough balance.
 
-Error Handling
-The burn function includes a check to ensure that an address has enough tokens to burn. If the balance is insufficient, the function will revert with the message "Insufficient balance to burn".
+## License
+
+This project is licensed under the MIT License.
+
+---
